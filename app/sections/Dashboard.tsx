@@ -447,6 +447,7 @@ export default function Dashboard({
             }}
           />
         </div>
+      </div>
       {donors.length === 0 && (
         <div className="p-5 rounded-[14px] bg-amber-50 border border-amber-300 text-amber-900 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
