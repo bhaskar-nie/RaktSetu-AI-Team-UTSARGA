@@ -19,7 +19,7 @@ async function getClient() {
 }
 
 function getBucket() {
-  return process.env.AWS_S3_BUCKET || ''
+  return process.env.AWS_S3_BUCKET || process.env.APP_AWS_S3_BUCKET || ''
 }
 
 function sdkMissing() {

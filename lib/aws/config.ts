@@ -1,7 +1,7 @@
 export function getAwsConfig() {
-  const region = process.env.AWS_REGION || 'us-east-1'
-  const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-  const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+  const region = process.env.AWS_REGION || process.env.APP_AWS_REGION || 'us-east-1'
+  const accessKeyId = process.env.AWS_ACCESS_KEY_ID || process.env.APP_AWS_ACCESS_KEY_ID
+  const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY || process.env.APP_AWS_SECRET_ACCESS_KEY
   if (!accessKeyId || !secretAccessKey) return null
   return { region, credentials: { accessKeyId, secretAccessKey } }
 }

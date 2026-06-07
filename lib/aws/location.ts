@@ -34,12 +34,12 @@ export async function geocodeAddress({ text }: { text: string }) {
   if (!text || !text.trim()) {
     return { success: false as const, error: 'text is required' }
   }
-  const indexName = process.env.AWS_LOCATION_PLACE_INDEX
+  const indexName = process.env.AWS_LOCATION_PLACE_INDEX || process.env.APP_AWS_LOCATION_PLACE_INDEX
   if (!indexName) {
     return {
       success: false as const,
       error:
-        'AWS_LOCATION_PLACE_INDEX not configured. Create a Place Index in AWS Location console and add the name to .env.local.',
+        'AWS_LOCATION_PLACE_INDEX / APP_AWS_LOCATION_PLACE_INDEX not configured. Create a Place Index in AWS Location console and add the name to .env.local.',
     }
   }
   const sdk = await loadSdk()

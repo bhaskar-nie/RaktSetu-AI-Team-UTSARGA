@@ -21,6 +21,7 @@ export async function invokeClaude({
   if (!cfg) return awsNotConfigured()
   const modelId =
     process.env.AWS_BEDROCK_MODEL_ID ||
+    process.env.APP_AWS_BEDROCK_MODEL_ID ||
     'anthropic.claude-3-5-sonnet-20241022-v2:0'
   if (!prompt) {
     return { success: false as const, error: 'prompt is required' }

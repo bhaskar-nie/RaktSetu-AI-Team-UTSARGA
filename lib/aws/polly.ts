@@ -79,11 +79,11 @@ export async function synthesizeSpeech({
   if (!text || !text.trim()) {
     return { success: false as const, error: 'text is required' }
   }
-  const bucket = process.env.AWS_S3_BUCKET
+  const bucket = process.env.AWS_S3_BUCKET || process.env.APP_AWS_S3_BUCKET
   if (!bucket) {
     return {
       success: false as const,
-      error: 'AWS_S3_BUCKET not configured in .env.local',
+      error: 'AWS_S3_BUCKET / APP_AWS_S3_BUCKET not configured in .env.local',
     }
   }
   const pollySdk = await loadPolly()

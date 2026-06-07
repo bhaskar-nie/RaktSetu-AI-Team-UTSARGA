@@ -56,11 +56,11 @@ export async function publishToTopic({
 }) {
   const cfg = getAwsConfig()
   if (!cfg) return awsNotConfigured()
-  const topicArn = process.env.AWS_SNS_TOPIC_ARN
+  const topicArn = process.env.AWS_SNS_TOPIC_ARN || process.env.APP_AWS_SNS_TOPIC_ARN
   if (!topicArn) {
     return {
       success: false as const,
-      error: 'AWS_SNS_TOPIC_ARN is not set in .env.local',
+      error: 'AWS_SNS_TOPIC_ARN / APP_AWS_SNS_TOPIC_ARN is not set in .env.local',
     }
   }
   if (!message) {

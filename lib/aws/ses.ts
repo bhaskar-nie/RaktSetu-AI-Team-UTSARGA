@@ -21,11 +21,11 @@ export async function sendEmail({
 }) {
   const cfg = getAwsConfig()
   if (!cfg) return awsNotConfigured()
-  const from = process.env.AWS_SES_FROM_EMAIL
+  const from = process.env.AWS_SES_FROM_EMAIL || process.env.APP_AWS_SES_FROM_EMAIL
   if (!from) {
     return {
       success: false as const,
-      error: 'AWS_SES_FROM_EMAIL is not set in .env.local',
+      error: 'AWS_SES_FROM_EMAIL / APP_AWS_SES_FROM_EMAIL is not set in .env.local',
     }
   }
   if (!to || !subject || !html) {
