@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  turbopack: {},
 
   // Reduce build time by skipping type checking (run separately)
   typescript: {
