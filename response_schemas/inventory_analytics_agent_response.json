@@ -1,0 +1,80 @@
+{
+  "agent_name": "Inventory Analytics Agent",
+  "agent_id": "6a23dc4c08932c26517945ab",
+  "description": "Analyzes blood inventory for shortages, expiring units, and supply chain recommendations",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "inventory_health_score": "number",
+      "critical_shortages": [
+        {
+          "blood_type": "string",
+          "units": "number",
+          "severity": "string",
+          "action": "string"
+        }
+      ],
+      "expiring_units": [
+        {
+          "blood_type": "string",
+          "units": "number",
+          "days_until_expiry": "number"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "string",
+          "recommendation": "string",
+          "expected_impact": "string"
+        }
+      ],
+      "blood_type_status": [
+        {
+          "blood_type": "string",
+          "units_available": "number",
+          "status": "string",
+          "notes": "string"
+        }
+      ],
+      "summary": "string"
+    }
+  },
+  "example_response": {
+    "result": {
+      "inventory_health_score": 0,
+      "critical_shortages": [
+        {
+          "blood_type": "sample string",
+          "units": 0,
+          "severity": "sample string",
+          "action": "sample string"
+        }
+      ],
+      "expiring_units": [
+        {
+          "blood_type": "sample string",
+          "units": 0,
+          "days_until_expiry": 0
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "sample string",
+          "recommendation": "sample string",
+          "expected_impact": "sample string"
+        }
+      ],
+      "blood_type_status": [
+        {
+          "blood_type": "sample string",
+          "units_available": 0,
+          "status": "sample string",
+          "notes": "sample string"
+        }
+      ],
+      "summary": "sample string"
+    }
+  }
+}

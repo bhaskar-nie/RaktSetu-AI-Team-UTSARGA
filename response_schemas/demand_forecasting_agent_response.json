@@ -1,0 +1,56 @@
+{
+  "agent_name": "Demand Forecasting Agent",
+  "agent_id": "6a23dc4bb5c0c11ba8bdd087",
+  "description": "Analyzes historical blood bank data to predict future demand for each blood type with SHAP-style explainability",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "predictions": [
+        {
+          "blood_type": "string",
+          "predicted_demand_units": "number",
+          "shortage_risk": "string",
+          "confidence_pct": "number",
+          "shap_factors": [
+            {
+              "factor": "string",
+              "impact": "number",
+              "direction": "string"
+            }
+          ]
+        }
+      ],
+      "summary": "string",
+      "critical_alerts": [
+        "string"
+      ],
+      "recommendation": "string"
+    }
+  },
+  "example_response": {
+    "result": {
+      "predictions": [
+        {
+          "blood_type": "sample string",
+          "predicted_demand_units": 0,
+          "shortage_risk": "sample string",
+          "confidence_pct": 0,
+          "shap_factors": [
+            {
+              "factor": "sample string",
+              "impact": 0,
+              "direction": "sample string"
+            }
+          ]
+        }
+      ],
+      "summary": "sample string",
+      "critical_alerts": [
+        "sample string"
+      ],
+      "recommendation": "sample string"
+    }
+  }
+}

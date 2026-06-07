@@ -1,0 +1,26 @@
+{
+  "agent_name": "Chat Simulation Agent",
+  "agent_id": "6a23dc4c4de1249a50b05684",
+  "description": "Simulates WhatsApp-style conversations as a blood bank coordinator",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "message": "string",
+      "intent": "string",
+      "suggested_actions": [
+        "string"
+      ]
+    }
+  },
+  "example_response": {
+    "result": {
+      "message": "sample string",
+      "intent": "sample string",
+      "suggested_actions": [
+        "sample string"
+      ]
+    }
+  }
+}

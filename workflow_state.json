@@ -1,0 +1,69 @@
+{
+  "app_name": "raktsetu",
+  "workflow": {
+    "nodes": [
+      {"id": "input_node", "type": "Input", "label": "User Input", "nodeCategory": "input"},
+      {"id": "demand_agent", "type": "Agent", "label": "Demand Forecasting Agent", "nodeCategory": "agent"},
+      {"id": "donor_agent", "type": "Agent", "label": "Donor Matching Agent", "nodeCategory": "agent"},
+      {"id": "chat_agent", "type": "Agent", "label": "Chat Simulation Agent", "nodeCategory": "agent"},
+      {"id": "inventory_agent", "type": "Agent", "label": "Inventory Analytics Agent", "nodeCategory": "agent"},
+      {"id": "output_node", "type": "Output", "label": "Response", "nodeCategory": "end"}
+    ],
+    "edges": [
+      {"source": "input_node", "target": "demand_agent"},
+      {"source": "input_node", "target": "donor_agent"},
+      {"source": "input_node", "target": "chat_agent"},
+      {"source": "input_node", "target": "inventory_agent"},
+      {"source": "demand_agent", "target": "output_node"},
+      {"source": "donor_agent", "target": "output_node"},
+      {"source": "chat_agent", "target": "output_node"},
+      {"source": "inventory_agent", "target": "output_node"}
+    ]
+  },
+  "database": {
+    "db_name": "app_38f76f97f2beb537caf06d47",
+    "collections": ["blood_requests", "donors", "inventory"]
+  },
+  "knowledge_bases": [
+    {
+      "rag_id": "6a23dbb9a563cbef5db16321",
+      "rag_name": "raktsetubloodbankdataai43",
+      "name": "raktsetu_blood_bank_data",
+      "description": "Blood bank dataset for demand forecasting, donor matching, and inventory analysis",
+      "files_ingested": ["https://asset.lyzr.app/3ULfWARD"]
+    }
+  ],
+  "agents": [
+    {
+      "name": "Demand Forecasting Agent",
+      "agent_id": "6a23dc4bb5c0c11ba8bdd087",
+      "provider_id": "OpenAI",
+      "model": "gpt-4o",
+      "has_knowledge_base": true,
+      "rag_id": "6a23dbb9a563cbef5db16321"
+    },
+    {
+      "name": "Donor Matching Agent",
+      "agent_id": "6a23dc4b73f8cfd0274c2377",
+      "provider_id": "OpenAI",
+      "model": "gpt-4o",
+      "has_knowledge_base": true,
+      "rag_id": "6a23dbb9a563cbef5db16321"
+    },
+    {
+      "name": "Chat Simulation Agent",
+      "agent_id": "6a23dc4c4de1249a50b05684",
+      "provider_id": "OpenAI",
+      "model": "gpt-4o",
+      "has_knowledge_base": false
+    },
+    {
+      "name": "Inventory Analytics Agent",
+      "agent_id": "6a23dc4c08932c26517945ab",
+      "provider_id": "OpenAI",
+      "model": "gpt-4o",
+      "has_knowledge_base": true,
+      "rag_id": "6a23dbb9a563cbef5db16321"
+    }
+  ]
+}

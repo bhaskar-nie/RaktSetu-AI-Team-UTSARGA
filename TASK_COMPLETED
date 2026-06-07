@@ -1,0 +1,27 @@
+RaktSetu AI UI build complete.
+
+Files created:
+- models/BloodRequest.ts, models/Donor.ts, models/Inventory.ts (lazy getter pattern)
+- app/api/auth/{register,login,logout,me}/route.ts (4 auth routes)
+- app/api/blood-requests/route.ts, app/api/blood-requests/[id]/route.ts
+- app/api/donors/route.ts, app/api/donors/[id]/route.ts
+- app/api/inventory/route.ts, app/api/inventory/[id]/route.ts
+- app/sections/Sidebar.tsx
+- app/sections/Dashboard.tsx
+- app/sections/DonorMatching.tsx
+- app/sections/WhatsAppSimulator.tsx
+- app/sections/InventoryAnalytics.tsx
+- app/sections/RequestsManagement.tsx
+- app/sections/DonorsManagement.tsx
+- app/page.tsx (composition shell with AuthProvider + ProtectedRoute)
+
+Features:
+- Emerald glassmorphic theme
+- 4 Lyzr agents wired via callAIAgent from @/lib/aiAgent
+- RAG_ID 6a23dbb9a563cbef5db16321 hardcoded for KB-enabled agents
+- Defensive JSON parsing with Array.isArray guards on all response fields
+- Database-backed (MongoDB via lyzr-architect) — no localStorage
+- Email/password auth only (no OAuth)
+- No emojis, no toast/sonner
+- Sample data toggle on Dashboard
+- Agent activity monitoring in header and footer

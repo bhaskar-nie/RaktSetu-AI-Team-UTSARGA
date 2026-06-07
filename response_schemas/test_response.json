@@ -1,0 +1,18 @@
+{
+  "agent_name": "test",
+  "agent_id": "6a23dc2708932c26517945a7",
+  "description": "Test",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "summary": "string"
+    }
+  },
+  "example_response": {
+    "result": {
+      "summary": "sample string"
+    }
+  }
+}

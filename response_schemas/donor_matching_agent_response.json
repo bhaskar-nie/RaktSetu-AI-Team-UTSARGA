@@ -1,0 +1,44 @@
+{
+  "agent_name": "Donor Matching Agent",
+  "agent_id": "6a23dc4b73f8cfd0274c2377",
+  "description": "Recommends compatible donors for blood requests based on ABO/Rh compatibility, recency, and availability",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "matches": [
+        {
+          "name": "string",
+          "blood_type": "string",
+          "compatibility_score": "number",
+          "last_donation_days_ago": "number",
+          "location": "string",
+          "contact": "string",
+          "availability_status": "string",
+          "match_reason": "string"
+        }
+      ],
+      "summary": "string",
+      "compatibility_notes": "string"
+    }
+  },
+  "example_response": {
+    "result": {
+      "matches": [
+        {
+          "name": "sample string",
+          "blood_type": "sample string",
+          "compatibility_score": 0,
+          "last_donation_days_ago": 0,
+          "location": "sample string",
+          "contact": "sample string",
+          "availability_status": "sample string",
+          "match_reason": "sample string"
+        }
+      ],
+      "summary": "sample string",
+      "compatibility_notes": "sample string"
+    }
+  }
+}
