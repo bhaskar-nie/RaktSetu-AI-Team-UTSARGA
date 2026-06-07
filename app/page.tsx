@@ -212,6 +212,16 @@ function AppShell() {
                 sampleMode={sampleMode}
                 setSampleMode={setSampleMode}
                 setActiveAgent={setActiveAgent}
+                refreshAll={async () => {
+                  await Promise.all([
+                    refreshInventory(),
+                    refreshRequests(),
+                    refreshDonors(),
+                    refreshPatients(),
+                    refreshBridges(),
+                    refreshTransfusions(),
+                  ])
+                }}
               />
             )}
             {section === 'donor-matching' && (

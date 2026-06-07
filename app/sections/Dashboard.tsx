@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
-import { Droplet, AlertTriangle, Activity, Users, TrendingUp, Loader2, Brain, BarChart3 } from 'lucide-react'
+import { Droplet, AlertTriangle, Activity, Users, TrendingUp, Loader2, Brain, BarChart3, Database } from 'lucide-react'
 import { callAIAgent } from '@/lib/aiAgent'
 import { formatBloodGroup, ALL_BLOOD_GROUPS } from '@/lib/bloodGroup'
 
@@ -41,6 +41,7 @@ interface DashboardProps {
   sampleMode: boolean
   setSampleMode: (v: boolean) => void
   setActiveAgent: (id: string | null) => void
+  refreshAll?: () => Promise<void>
 }
 
 function unitsAvailableFor(group: string, inventory: any[]): number {
@@ -232,6 +233,7 @@ export default function Dashboard({
   sampleMode,
   setSampleMode,
   setActiveAgent,
+  refreshAll,
 }: DashboardProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -241,6 +243,34 @@ export default function Dashboard({
   const [dropoutError, setDropoutError] = useState<string | null>(null)
   const [dropoutTotal, setDropoutTotal] = useState<number>(0)
   const [bloodDistribution, setBloodDistribution] = useState<Record<string, number> | null>(null)
+
+  const [importing, setImporting] = useState(false)
+  const [importBanner, setImportBanner] = useState<{ tone: 'green' | 'red'; text: string } | null>(null)
+
+  const handleImportDataset = async () => {
+    setImporting(true)
+    setImportBanner(null)
+    try {
+      const res = await fetch('/api/donors/import-dataset', {
+        method: 'POST',
+        credentials: 'include',
+      })
+      const json = await res.json()
+      if (json?.success) {
+        if (refreshAll) await refreshAll()
+        setImportBanner({
+          tone: 'green',
+          text: `Successfully imported ${json?.data?.imported ?? 0} records, skipped ${json?.data?.skipped ?? 0} duplicate/existing records. Your dashboard metrics have been updated.`,
+        })
+      } else {
+        setImportBanner({ tone: 'red', text: json?.error || 'Dataset import failed.' })
+      }
+    } catch (e: any) {
+      setImportBanner({ tone: 'red', text: e?.message || 'Network error during import.' })
+    } finally {
+      setImporting(false)
+    }
+  }
 
   useEffect(() => {
     let cancelled = false
@@ -417,7 +447,46 @@ export default function Dashboard({
             }}
           />
         </div>
-      </div>
+      {donors.length === 0 && (
+        <div className="p-5 rounded-[14px] bg-amber-50 border border-amber-300 text-amber-900 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <h3 className="text-sm font-bold flex items-center gap-1.5">
+              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+              To view analytics in the new account, import the dataset first
+            </h3>
+            <p className="text-xs text-amber-800/80 mt-1">
+              Your database is currently empty. Populate the tables with 82 sample records (including donors, coordinates, and historic statuses) to enable all analytics dashboards, mapping models, and bridge simulations.
+            </p>
+          </div>
+          <Button
+            onClick={handleImportDataset}
+            disabled={importing}
+            className="shrink-0 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-[hsl(40,50%,98%)] rounded-[10px] shadow-sm hover:shadow"
+          >
+            {importing ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Importing...
+              </>
+            ) : (
+              <>
+                <Database className="w-4 h-4 mr-2" /> Import Dataset
+              </>
+            )}
+          </Button>
+        </div>
+      )}
+
+      {importBanner && (
+        <div
+          className={`p-3 rounded-[10px] border text-sm ${
+            importBanner.tone === 'green'
+              ? 'bg-green-50 border-green-200 text-green-800'
+              : 'bg-red-50 border-red-200 text-red-700'
+          }`}
+        >
+          {importBanner.text}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
